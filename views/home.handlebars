@@ -1,0 +1,15 @@
+
+
+
+    <h1>atik deja pibliye:</h1>
+ 
+
+<ul class="p-3 mb-2 bg-secondary text-white" id="blogsList">
+    {{#each blogs as |blog|}}
+    <p class="font-weight-bold">Tit Atik la: {{title}}</p>
+    <p class="form-control input-lg">{{content}}</p>
+    <p>otè: {{author.authorname}}</p>
+    <p>Ekri le {{createdAt}}</p>
+    {{/each}}
+</ul>
+ <p>Si ou se yon otè, klike <a href="/login">la</a> pou konekte</p>

@@ -1,0 +1,25 @@
+
+<h1>Otè: {{author.authorname}}</h1>
+<button  class="btn btn-primary pull-right btn-sm RbtnMargin"id="logoutBtn">Dekonekte</button>
+
+<br></br>
+
+<form>
+    <input class="form-control input-sm" id='blogTitle' type="text" name="blogTitle" placeholder="Enter Title"/>
+     <input class="form-control input-lg" id='blogInput' type="text" name="blogInput" placeholder="Enter Blog"/>
+
+<br>
+  <button type="button" class="btn btn-dark" id="blogsubmitBtn">Pibliye</button>
+
+</form>
+
+<br>
+<h3>Atik Pibliye: </h3>
+<ul  id="blogList">
+  {{#each author.blogs as |blog|}}
+    <p class="form-control input-sm">Tit Atik: {{blog.title}}</p>
+    <p class="form-control input-lg">{{blog.content}}</p>
+  {{/each}}
+</ul>
+
+<script src="/js/authorProfile.js"></script>
