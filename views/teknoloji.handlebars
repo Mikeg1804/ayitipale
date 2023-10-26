@@ -1,0 +1,46 @@
+
+<style>
+  /* Define custom background color and text color */
+  .custom-bg {
+    background-color: #001F3F;
+    color: white;
+    font-weight: bold;
+  }
+</style>
+
+<div class="container mt-5">
+    <ul class="list-group mb-4" id="blogsList">
+        {{#if hasTeknolojiBlogs}}
+            {{#each blogs as |blog|}}
+                {{#eq blog.dataValues.category "Teknoloji"}}
+                    <li class="list-group-item mb-4">
+                        <p class="list-group-item custom-bg text-uppercase">Category: {{blog.dataValues.category}}</p>
+                        <h2 class="font-weight-bold text-uppercase">{{blog.dataValues.title}}</h2>
+                        <p style="white-space: pre-line">{{{blog.dataValues.content}}}</p>
+                        <p class="list-group-item custom-bg text-uppercase">Otè  {{blog.dataValues.author.dataValues.authorname}}</p>
+                        <p class="text-muted">Ekri le {{blog.dataValues.formattedDate}}</p>
+                    </li>
+                            <footer class="blockquote-footer">{{format_date blog.createdAt}} <button id="likeBtn" onclick="like(this)" class="{{blog.id}} {{blog.totalLikes}} {{loggedInUser.id}} fa fa-thumbs-up"></button> Likes: {{blog.totalLikes}}</footer>
+        
+<form>
+    <div class="card mt-5 col-12">
+  <div class="card-header d-flex justify-content-center text-bg-dark">
+    <h4>Lage yon ti Komantè: </h4>
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <input id='comment' type="text" name="comment" class="col-11" placeholder="Bèl Atik!!"/>
+      <button type="button" class="btn btn-dark text-light" id="commentSubmitBtn">PIBLIYE</button>
+    </blockquote>
+  </div>
+</div>
+</form>
+
+                {{/eq}}
+            {{/each}}
+        {{else}}
+            <h2 class="font-weight-bold">Poko gen atik ki ekri nan kategori sa</h2>
+        {{/if}}
+    </ul>
+</div>
+

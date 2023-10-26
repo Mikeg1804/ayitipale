@@ -3,20 +3,20 @@ const {Model, DataTypes} = require('sequelize');
 const sequelize = require('../config/connection');
 
 
-class Author extends Model {
+class Author extends Model {}
 
-}
-
-Author.init({
-id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    primaryKey: true,
-    autoIncrement: true
-},
+Author.init(
+{
+    id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true,
+        allowNull: false,
+      },
 authorname: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    unique: true,
 },
 password: {
     type: DataTypes.STRING,
@@ -25,17 +25,22 @@ password: {
 email: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
+    unique: false,
     validate: {
         isEmail: true
     }
-}
+},
+role: {
+    type: DataTypes.STRING, 
+    allowNull: false,
+    defaultValue: 'user', // Default role for regular users
+  },
 },
 {
     sequelize,
-    // timestamps: false,
+    timestamps: false,
     freezeTableName: true,
-    underscored: true,
+    // underscored: true,
     modelName: 'author'
 });
 

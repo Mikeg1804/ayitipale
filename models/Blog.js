@@ -6,30 +6,51 @@ class Blog extends Model {
 }
 
 Blog.init({
-    id:{
-        type: DataTypes.INTEGER,
-        allowNull: false,
+    id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
-        autoIncrement: true
-    },
+        allowNull: false,
+      },
     title: { type: DataTypes.STRING, 
         allowNull: false
      },
     content: { type: DataTypes.TEXT, 
         allowNull: false 
     },
-    authorId: { type: DataTypes.INTEGER,
+    image: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+    authorId: { 
+        type: DataTypes.UUID,
         references: {
             model: 'author',
             key: 'id'
         },
     },
+    commentId: { 
+      type: DataTypes.UUID,
+      references: {
+          model: 'comment',
+          key: 'id'
+      },
+  },
+
+    category: {
+        type: DataTypes.ENUM('Teknoloji', 'Nati', 'Agrikilti', 'Komedi' ,'kontantman', 'biznis', 'ekonomi', 'lot'), // Add your categories here
+        allowNull: false
+      },
+    totalLikes: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+      },
 }, 
 {
     sequelize,
     // timestamps: true,
     freezeTableName: true,
-    underscored: true,
+    // underscored: true,
     modelName: 'blogs'
 }
 );

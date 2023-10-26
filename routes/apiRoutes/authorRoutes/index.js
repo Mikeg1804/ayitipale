@@ -50,11 +50,81 @@ router.post('/login', async (req, res) => {
     }
 });
 
+
+
 router.post('/logout', (req, res) => {
         req.session.destroy(() => {
             res.json({ success: true });
         });
       });
       
+
+
+
+
+  // Admin user signup route
+router.post('/admin/signup', async (req, res) => {
+    try {
+      const adminData = req.body;
+      if (!adminData.email) {
+        return res.status(400).json({ message: 'Please enter an email address!' });
+      }
+      
+      const hashedPassword = await bcrypt.hash(adminData.password, 10);
+      adminData.password = hashedPassword;
+      adminData.isAdmin = true; // Set isAdmin flag for admin user
+      
+      const newAdmin = await Author.create(adminData);
+      
+      req.session.save(() => {
+        req.session.author = newAdmin.id;
+        req.session.loggedin = true;
+        res.status(200).json(newAdmin);
+      });
+    } catch (err) {
+      res.status(500).json({ message: 'An error occurred during admin signup.' });
+    }
+  });
+  
+  // Admin user login route
+  router.post('/admin/login', async (req, res) => {
+    try {
+      const adminData = await Author.findOne({
+        where: {
+          authorname: req.body.authorname,
+        }
+      });
+      
+      if (!adminData || !adminData.isAdmin) {
+        return res.status(400).json({ message: 'Incorrect username or password!' });
+      }
+      
+      const validPassword = await bcrypt.compare(
+        req.body.password,
+        adminData.password
+      );
+      
+      if (!validPassword) {
+        return res.status(400).json({ message: 'Incorrect email or password!' });
+      }
+      
+      req.session.save(() => {
+        req.session.author = adminData.get({ plain: true });
+        req.session.loggedin = true;
+        res.redirect('/admin/dashboard'); // Redirect to admin dashboard upon successful login
+      });
+    } catch (err) {
+      res.status(500).json({ message: 'An error occurred during admin login.' });
+    }
+  });
+  
+  // Admin dashboard route
+  router.get('/admin/dashboard', (req, res) => {
+    // Implement functionality to list all blogs and provide options to delete them
+    // You might need to query the Blog model to retrieve the blog data
+  });
+      
+
+
 
 module.exports = router;

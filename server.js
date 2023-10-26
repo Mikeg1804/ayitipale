@@ -1,6 +1,8 @@
 // Dependencies
+// Need to fix like and comments routes.
 const express = require('express');
 const exphbs = require('express-handlebars');
+const Handlebars = require('handlebars');
 const session = require('express-session');
 const routes = require('./routes');
 const helpers = require('./utils');
@@ -22,6 +24,21 @@ const PORT = process.env.PORT || 3001;
 // Set Handlebars as the default template engine.
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
+
+Handlebars.registerHelper('eq', function(a, b, options) {
+  // If used as a subexpression, return a boolean value
+  if (!options) {
+      return a === b;
+  }
+  
+  // Ensure we have both fn and inverse
+  if (typeof options.fn !== 'function' || typeof options.inverse !== 'function') {
+      throw new Error('eq helper must be used as a block helper with both true and inverse blocks.');
+  }
+  
+  return a === b ? options.fn(this) : options.inverse(this);
+});
+
 
 const sessionConfig = {
   secret: 'Super secret secret',
@@ -51,3 +68,5 @@ sequelize.sync({force: false}).then(() => {
     console.log(`App listening on port ${PORT}!`);
   });
 });
+
+
