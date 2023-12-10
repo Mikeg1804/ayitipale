@@ -172,7 +172,7 @@ console.log(selectedBlogId);
       });
   console.log(response);
       const data = await response.json();
-      location.reload();
+      // location.reload();
   
     } catch (error) {
       console.log(error);

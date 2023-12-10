@@ -18,7 +18,7 @@
             <p style="white-space: pre-line">{{{blog.content}}}</p>
             <p class="list-group-item custom-bg text-uppercase">otè: {{blog.author.authorname}}</p>
             <p class="text-muted ">{{blog.createdAtKreyol}}</p>
-            
+             <p class="text-muted ">{{blog.comment.content}}</p>
         
 <!-- Like button and form for comments -->
 <footer class="blockquote-footer">{{format_date blog.createdAt}} <button onclick="like(this)" class="{{blog.id}} {{blog.totalLikes}} {{loggedInUser.id}} fa fa-thumbs-up"></button> Likes: {{blog.totalLikes}}</footer>

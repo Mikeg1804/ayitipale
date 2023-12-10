@@ -73,15 +73,15 @@ router.get('/login', async (req, res) => {
                     model: Author,
                     attributes: ['authorname'],
                 }
-                // ,
-                // {
-                //     model: Comment,
-                //     attributes: ['content'],
-                // },
+                ,
+                {
+                    model: Comment,
+                    attributes: ['content'],
+                },
             ],
             order: [['createdAt', 'DESC']], // Order by createdAt in descending order
         });
-
+console.log(blogsData);
 
         const blogs = blogsData.map((blog) => {
             let plainBlog = blog.get({ plain: true });
