@@ -41,7 +41,7 @@
       <!-- Comments section -->
       <h2>Komantè </h2>
       {{#each comments as |comment|}}
-      {{#if (isEqual comment.blogId blog.id)}}
+      {{#if (isEqual comment.blogId)}}
       <div class="card mt-1 col-12">
         <div class="card-header d-flex justify-content-center text-bg-dark">
           Made by: {{comment.authorname}}

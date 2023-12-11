@@ -1,48 +1,8 @@
 
 
 
-const router = require('express').Router();
-const { Comment, Blog } = require('../../../models');
-
-router.post('/', async (req, res) => {
-    try {
-     const newComment = await Comment.create({
-            content: req.body.content,
-            authorname: req.session.author.authorname,
-            blogsId: req.body.blogId,
-        });
-
-    await Blog.update(
-        {
-            $push: { comment: {
-                content: req.body.content,
-                authorname: req.session.author.authorname,
-                blogsId: req.body.blogId,
-            }}
-        },
-        {
-            where: {
-                id: req.body.blogId
-            }
-        }
-    );
-
-    console.log(newComment);
-
-        res.status(200).json(newComment);
-    } catch (error) {
-        console.log(error);
-        res.status(500).json(error);
-    }
-});
-
-module.exports = router;
-
-
-
-
 // const router = require('express').Router();
-// const { Comment } = require('../../../models');
+// const { Comment, Blog } = require('../../../models');
 
 // router.post('/', async (req, res) => {
 //     try {
@@ -51,6 +11,21 @@ module.exports = router;
 //             authorname: req.session.author.authorname,
 //             blogsId: req.body.blogId,
 //         });
+
+//     await Blog.update(
+//         {
+//             $push: { comment: {
+//                 content: req.body.content,
+//                 authorname: req.session.author.authorname,
+//                 blogsId: req.body.blogId,
+//             }}
+//         },
+//         {
+//             where: {
+//                 id: req.body.blogId
+//             }
+//         }
+//     );
 
 //     console.log(newComment);
 
@@ -62,6 +37,31 @@ module.exports = router;
 // });
 
 // module.exports = router;
+
+
+
+
+const router = require('express').Router();
+const { Comment } = require('../../../models');
+
+router.post('/', async (req, res) => {
+    try {
+     const newComment = await Comment.create({
+            content: req.body.content,
+            authorname: req.session.author.authorname,
+            blogsId: req.body.blogId,
+        });
+
+    // console.log(newComment);
+
+        res.status(200).json(newComment);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error);
+    }
+});
+
+module.exports = router;
 
 
 

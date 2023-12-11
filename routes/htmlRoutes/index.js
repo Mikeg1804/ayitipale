@@ -73,15 +73,20 @@ router.get('/login', async (req, res) => {
                     model: Author,
                     attributes: ['authorname'],
                 }
-                ,
-                {
-                    model: Comment,
-                    attributes: ['content'],
-                },
             ],
             order: [['createdAt', 'DESC']], // Order by createdAt in descending order
         });
-console.log(blogsData);
+        const commentsData = await Comment.findAll({
+            include: [
+                {
+                    model: Author,
+                    attributes: ['authorname'],
+                }
+            ],
+            order: [['createdAt', 'DESC']], 
+        });
+console.log(blogsData[0].dataValues);
+// console.log(commentsData);
 
         const blogs = blogsData.map((blog) => {
             let plainBlog = blog.get({ plain: true });
@@ -93,8 +98,28 @@ console.log(blogsData);
             return plainBlog;
         });
     
+        const comments = commentsData.map((comment) => {
+            let plainComment = comment.get({plain: true});
+
+            return plainComment
+
+        });
+
+        // console.log(comments);
+
+        const blogsWithComments = blogs.map((blog) => {
+            const blogComments = comments.filter((comment) => comment.blogId === blog.id);
+            return {
+                ...blog,
+                comments: blogComments,
+            };
+            console.log(blogComments.author);
+        });
+        
+        // console.log(blogsWithComments);
 
         res.render('home', {
+            comments,
             blogs,
             loggedInAuthor: req.session.author || null,
         });
