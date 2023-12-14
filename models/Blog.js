@@ -29,13 +29,12 @@ Blog.init({
             key: 'id'
         },
     },
-    commentId: { 
-      type: DataTypes.UUID,
-      references: {
-          model: 'comment',
-          key: 'id'
-      },
-  },
+    // commentArray: [{ 
+    //   type: DataTypes.UUID,
+    //   references: {
+    //       model: 'comment',
+    //       key: 'id'
+    //   }}],
 
     category: {
         type: DataTypes.ENUM('Teknoloji', 'Nati', 'Agrikilti', 'Komedi' ,'kontantman', 'biznis', 'ekonomi', 'lot'), // Add your categories here

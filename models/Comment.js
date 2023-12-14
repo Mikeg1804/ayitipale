@@ -16,21 +16,13 @@ Comment.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    blogsId: {
+    authorId: { 
       type: DataTypes.UUID,
       references: {
-          model: 'blogs',
+          model: 'author',
           key: 'id'
       },
-  },  
-    authorname: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      references: {
-        model: 'author',
-        key: 'authorname',
-      }
-    },
+  },
     totalLikes: {
       type: DataTypes.INTEGER,
       defaultValue: 0,

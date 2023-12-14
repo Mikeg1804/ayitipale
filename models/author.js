@@ -17,6 +17,7 @@ authorname: {
     type: DataTypes.STRING,
     allowNull: false,
     unique: false,
+    index: true,
 },
 password: {
     type: DataTypes.STRING,

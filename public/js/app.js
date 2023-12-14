@@ -157,7 +157,7 @@ async function dislike(event) {
     try {
       // Get the selected blog ID from the hidden input field
       const selectedBlogId = document.getElementById('selectedBlogId').value;
-console.log(selectedBlogId);
+
   
       // Send the comment to the server using fetch
       const response = await fetch('/api/comments', {
@@ -170,7 +170,7 @@ console.log(selectedBlogId);
           'Content-Type': 'application/json',
         },
       });
-  console.log(response);
+
       const data = await response.json();
       // location.reload();
   

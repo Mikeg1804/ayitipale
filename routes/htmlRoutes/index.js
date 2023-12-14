@@ -72,21 +72,22 @@ router.get('/login', async (req, res) => {
                 {
                     model: Author,
                     attributes: ['authorname'],
-                }
+                },
+                {
+                    model: Comment,
+                    attributes: ['content', 'authorId', 'createdAt', 'updatedAt'],
+                    include: [
+                        {
+                            model: Author,
+                            attributes: ['authorname'],
+                            as: 'author', // Alias for the included Author model in Comment
+                        },
+                    ],
+                },
             ],
             order: [['createdAt', 'DESC']], // Order by createdAt in descending order
         });
-        const commentsData = await Comment.findAll({
-            include: [
-                {
-                    model: Author,
-                    attributes: ['authorname'],
-                }
-            ],
-            order: [['createdAt', 'DESC']], 
-        });
-console.log(blogsData[0].dataValues);
-// console.log(commentsData);
+
 
         const blogs = blogsData.map((blog) => {
             let plainBlog = blog.get({ plain: true });
@@ -98,28 +99,9 @@ console.log(blogsData[0].dataValues);
             return plainBlog;
         });
     
-        const comments = commentsData.map((comment) => {
-            let plainComment = comment.get({plain: true});
-
-            return plainComment
-
-        });
-
-        // console.log(comments);
-
-        const blogsWithComments = blogs.map((blog) => {
-            const blogComments = comments.filter((comment) => comment.blogId === blog.id);
-            return {
-                ...blog,
-                comments: blogComments,
-            };
-            console.log(blogComments.author);
-        });
-        
-        // console.log(blogsWithComments);
+ console.log(blogs[0].comments);
 
         res.render('home', {
-            comments,
             blogs,
             loggedInAuthor: req.session.author || null,
         });

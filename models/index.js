@@ -3,6 +3,7 @@ const Author = require('./Author');
 const Comment = require('./Comment');
 const Likes = require('./Likes');
 const ObsceneBlog = require('./ObsceneBlog');
+const BlogComment = require('./BlogComment');
 
 Author.hasMany(Blog, {
     foreignKey: 'authorId',
@@ -14,6 +15,9 @@ Blog.belongsTo(Author, {
 });
 
 
+Blog.belongsToMany(Comment, { through: 'blog_comment', foreignKey: 'blogId' });
+Comment.belongsToMany(Blog, { through: 'blog_comment', foreignKey: 'commentId' });
+
 Blog.hasMany(Comment, {
     foreignKey: 'blogId',
     onDelete: 'CASCADE',
@@ -24,12 +28,12 @@ Comment.belongsTo(Blog, {
   });
 
   Author.hasMany(Comment, {
-    foreignKey: 'authorCommentId',
+    foreignKey: 'authorId',
     onDelete: 'CASCADE',
   });
 
   Comment.belongsTo(Author, {
-    foreignKey: 'authorCommentId',
+    foreignKey: 'authorId',
   }); 
   
   Author.hasMany(Likes, {
@@ -61,4 +65,4 @@ Comment.belongsTo(Blog, {
   });
 
 module.exports = { Author, Blog, Comment,
-    Likes, ObsceneBlog };
+    Likes, ObsceneBlog, BlogComment };

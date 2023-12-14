@@ -18,7 +18,7 @@
             <p style="white-space: pre-line">{{{blog.content}}}</p>
             <p class="list-group-item custom-bg text-uppercase">otè: {{blog.author.authorname}}</p>
             <p class="text-muted ">{{blog.createdAtKreyol}}</p>
-             <p class="text-muted ">{{blog.comment.content}}</p>
+             <p class="text-muted ">{{blog.comments.content}}</p>
         
 <!-- Like button and form for comments -->
 <footer class="blockquote-footer">{{format_date blog.createdAt}} <button onclick="like(this)" class="{{blog.id}} {{blog.totalLikes}} {{loggedInUser.id}} fa fa-thumbs-up"></button> Likes: {{blog.totalLikes}}</footer>
@@ -40,21 +40,19 @@
       
       <!-- Comments section -->
       <h2>Komantè </h2>
-      {{#each comments as |comment|}}
-      {{#if (isEqual comment.blogId)}}
-      <div class="card mt-1 col-12">
+{{#each blog.comments as |comment|}}
+    <div class="card mt-1 col-12">
         <div class="card-header d-flex justify-content-center text-bg-dark">
-          Made by: {{comment.authorname}}
+            Made by: {{comment.author.authorname}}
         </div>
         <div class="card-body">
-          <blockquote class="blockquote mb-0">
-            <p>{{comment.content}}</p>
-            <footer class="blockquote-footer">{{format_date comment.createdAt}}</footer>
-          </blockquote>
+            <blockquote class="blockquote mb-0">
+                <p>{{comment.content}}</p>
+                <footer class="blockquote-footer">{{format_date comment.createdAt}}</footer>
+            </blockquote>
         </div>
-      </div>
-      {{/if}}
-      {{/each}}
+    </div>
+{{/each}}
       
     </li>
     {{/each}}
