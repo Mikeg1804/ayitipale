@@ -172,7 +172,7 @@ async function dislike(event) {
       });
 
       const data = await response.json();
-      // location.reload();
+      location.reload();
   
     } catch (error) {
       console.log(error);
