@@ -42,12 +42,11 @@
       <h2>Komantè </h2>
 {{#each blog.comments as |comment|}}
     <div class="card mt-1 col-12">
-        <div class="card-header d-flex justify-content-center text-bg-dark">
-            Made by: {{comment.author.authorname}}
-        </div>
+    
         <div class="card-body">
             <blockquote class="blockquote mb-0">
                 <p>{{comment.content}}</p>
+                <p class="list-group-item custom-bg text-uppercase">Otè: {{comment.author.authorname}} </p>
                 <footer class="blockquote-footer">{{format_date comment.createdAt}}</footer>
             </blockquote>
         </div>
@@ -61,4 +60,6 @@
 
 <!-- Hidden input field to store the selected blogId -->
 <input type="hidden" id="selectedBlogId" value="">
+
+<script src="/js/reaction.js"></script>
 
