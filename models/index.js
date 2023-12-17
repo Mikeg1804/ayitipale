@@ -1,8 +1,8 @@
 const Blog = require("./Blog");
 const Author = require("./Author/index.js");
 const Comment = require("./Comment");
-const Likes = require("./Likes");
-const ObsceneBlog = require("./ObsceneBlog");
+// const Likes = require("./Likes");
+// const ObsceneBlog = require("./ObsceneBlog");
 const BlogComment = require("./BlogComment");
 
 Author.hasMany(Blog, {
@@ -38,31 +38,31 @@ Comment.belongsTo(Author, {
   foreignKey: "authorId",
 });
 
-Author.hasMany(Likes, {
-  foreignKey: "authorLikedId",
-  onDelete: "CASCADE",
-});
+// Author.hasMany(Likes, {
+//   foreignKey: "authorLikedId",
+//   onDelete: "CASCADE",
+// });
 
-Likes.belongsTo(Author, {
-  foreignKey: "authorLikedId",
-});
+// Likes.belongsTo(Author, {
+//   foreignKey: "authorLikedId",
+// });
 
-Blog.hasMany(Likes, {
-  foreignKey: "likedBlogId",
-  onDelete: "CASCADE",
-});
+// Blog.hasMany(Likes, {
+//   foreignKey: "likedBlogId",
+//   onDelete: "CASCADE",
+// });
 
-Likes.belongsTo(Blog, {
-  foreignKey: "likedBlogId",
-});
+// Likes.belongsTo(Blog, {
+//   foreignKey: "likedBlogId",
+// });
 
-Blog.hasMany(ObsceneBlog, {
-  foreignKey: "blogId",
-  onDelete: "CASCADE",
-});
+// Blog.hasMany(ObsceneBlog, {
+//   foreignKey: "blogId",
+//   onDelete: "CASCADE",
+// });
 
-ObsceneBlog.belongsTo(Blog, {
-  foreignKey: "blogId",
-});
+// ObsceneBlog.belongsTo(Blog, {
+//   foreignKey: "blogId",
+// });
 
-module.exports = { Author, Blog, Comment, Likes, ObsceneBlog, BlogComment };
+module.exports = { Author, Blog, Comment, BlogComment };
