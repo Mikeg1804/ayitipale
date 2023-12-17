@@ -1,5 +1,4 @@
-// Dependencies
-// Need to fix like and comments routes.
+
 const express = require('express');
 const exphbs = require('express-handlebars');
 const Handlebars = require('handlebars');
@@ -7,7 +6,7 @@ const session = require('express-session');
 const routes = require('./routes');
 const helpers = require('./utils');
 const path = require('path');
-// remember to look up what this does. It was missing in this app, but included in the gang social media app.
+
 require('dotenv').config();
 
 const hbs =exphbs.create({
