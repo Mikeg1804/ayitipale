@@ -1,68 +1,68 @@
-const Blog = require('./Blog');
-const Author = require('./Author.js');
-const Comment = require('./Comment');
-const Likes = require('./Likes');
-const ObsceneBlog = require('./ObsceneBlog');
-const BlogComment = require('./BlogComment');
+const Blog = require("./Blog");
+const Author = require("./Author/index.js");
+const Comment = require("./Comment");
+const Likes = require("./Likes");
+const ObsceneBlog = require("./ObsceneBlog");
+const BlogComment = require("./BlogComment");
 
 Author.hasMany(Blog, {
-    foreignKey: 'authorId',
-    onDelete: 'CASCADE',
+  foreignKey: "authorId",
+  onDelete: "CASCADE",
 });
 
 Blog.belongsTo(Author, {
-    foreignKey: 'authorId',
+  foreignKey: "authorId",
 });
 
-
-Blog.belongsToMany(Comment, { through: 'blog_comment', foreignKey: 'blogId' });
-Comment.belongsToMany(Blog, { through: 'blog_comment', foreignKey: 'commentId' });
+Blog.belongsToMany(Comment, { through: "blog_comment", foreignKey: "blogId" });
+Comment.belongsToMany(Blog, {
+  through: "blog_comment",
+  foreignKey: "commentId",
+});
 
 Blog.hasMany(Comment, {
-    foreignKey: 'blogId',
-    onDelete: 'CASCADE',
-  });
-  
+  foreignKey: "blogId",
+  onDelete: "CASCADE",
+});
+
 Comment.belongsTo(Blog, {
-    foreignKey: 'blogId', 
-  });
+  foreignKey: "blogId",
+});
 
-  Author.hasMany(Comment, {
-    foreignKey: 'authorId',
-    onDelete: 'CASCADE',
-  });
+Author.hasMany(Comment, {
+  foreignKey: "authorId",
+  onDelete: "CASCADE",
+});
 
-  Comment.belongsTo(Author, {
-    foreignKey: 'authorId',
-  }); 
-  
-  Author.hasMany(Likes, {
-    foreignKey: 'authorLikedId',
-    onDelete: 'CASCADE',
-    });
-  
-  Likes.belongsTo(Author, {
-    foreignKey: 'authorLikedId',
-  });
+Comment.belongsTo(Author, {
+  foreignKey: "authorId",
+});
 
+Author.hasMany(Likes, {
+  foreignKey: "authorLikedId",
+  onDelete: "CASCADE",
+});
 
-  Blog.hasMany(Likes, {
-    foreignKey: 'likedBlogId',
-    onDelete: 'CASCADE',
-  });
-  
-  Likes.belongsTo(Blog, {
-    foreignKey: 'likedBlogId',
-  });
+Likes.belongsTo(Author, {
+  foreignKey: "authorLikedId",
+});
 
-  Blog.hasMany(ObsceneBlog, {
-    foreignKey: 'blogId',
-    onDelete: 'CASCADE',
-  });
-  
-  ObsceneBlog.belongsTo(Blog, {
-    foreignKey: 'blogId',
-  });
+Blog.hasMany(Likes, {
+  foreignKey: "likedBlogId",
+  onDelete: "CASCADE",
+});
 
-module.exports = { Author, Blog, Comment,
-    Likes, ObsceneBlog, BlogComment };
+Likes.belongsTo(Blog, {
+  foreignKey: "likedBlogId",
+});
+
+Blog.hasMany(ObsceneBlog, {
+  foreignKey: "blogId",
+  onDelete: "CASCADE",
+});
+
+ObsceneBlog.belongsTo(Blog, {
+  foreignKey: "blogId",
+});
+
+module.exports = { Author, Blog, Comment, Likes, ObsceneBlog, BlogComment };
