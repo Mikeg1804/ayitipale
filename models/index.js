@@ -1,5 +1,5 @@
 const Blog = require("./Blog");
-const Author = require("./User");
+const Author = require("./Author");
 const Comment = require("./Comment");
 // const Likes = require("./Likes");
 // const ObsceneBlog = require("./ObsceneBlog");
