@@ -6,57 +6,72 @@
     color: white;
     font-weight: bold;
   }
+  
 </style>
 
+<!-- Modify the existing code for iPhone view -->
 <div class="container mt-5">
 
     <ul class="list-group mb-4" id="blogsList">
         {{#each blogs as |blog|}}
         <li class="list-group-item mb-4">
-            <p class="list-group-item custom-bg text-uppercase"> Kategori: {{blog.category}}</p>
-            <h2 class="font-weight-bold text-uppercase"> {{blog.title}}</h2>
-            <p style="white-space: pre-line">{{{blog.content}}}</p>
-            <p class="list-group-item custom-bg text-uppercase">otè: {{blog.author.authorname}}</p>
-            <p class="text-muted ">{{blog.createdAtKreyol}}</p>
-             <p class="text-muted ">{{blog.comments.content}}</p>
-        
-<!-- Like button and form for comments -->
-<footer class="blockquote-footer">{{format_date blog.createdAt}} <button onclick="like(this)" class="{{blog.id}} {{blog.totalLikes}} {{loggedInUser.id}} fa fa-thumbs-up"></button> Likes: {{blog.totalLikes}}</footer>
-<form>
-  <div class="card mt-5 col-12">
-    <div class="card-header d-flex justify-content-center text-bg-dark">
-      <h4>Lage yon ti Komantè: </h4>
-    </div>
-    <div class="card-body">
-      <blockquote class="blockquote mb-0">
-        <input id='comment' type="text" name="comment" class="col-11" placeholder="Bèl Atik!!"/>
-        <!-- Pass the blogId to the setSelectedBlogId function -->
-        <button id="commentSubmitBtn" type="button" class="{{blog.id}} btn btn-dark text-light" onclick="setSelectedBlogId('{{blog.id}}')">PIBLIYE</button>
-      </blockquote>
-    </div>
-  </div>
-</form>
+            <div class="d-flex flex-column">
 
-      
-      <!-- Comments section -->
-      <h2>Komantè </h2>
-{{#each blog.comments as |comment|}}
-    <div class="card mt-1 col-12">
-    
-        <div class="card-body">
-            <blockquote class="blockquote mb-0">
-                <p>{{comment.content}}</p>
-                <p class="list-group-item custom-bg text-uppercase">Otè: {{comment.author.authorname}} </p>
-                <footer class="blockquote-footer">{{format_date comment.createdAt}}</footer>
-            </blockquote>
-        </div>
-    </div>
-{{/each}}
-      
-    </li>
-    {{/each}}
-  </ul>
+                <!-- Category -->
+                <p class="list-group-item custom-bg text-uppercase mb-2"> Kategori: {{blog.category}}</p>
+
+                <!-- Title -->
+                <h2 class="font-weight-bold text-uppercase mb-2"> {{blog.title}}</h2>
+
+                <!-- Content -->
+                <p style="white-space: pre-line" class="mb-2">{{{blog.content}}}</p>
+
+                <!-- Author -->
+                <p class="list-group-item custom-bg text-uppercase mb-2">otè: {{blog.author.authorname}}</p>
+
+                <!-- Date -->
+                <p class="text-muted mb-2">{{blog.createdAtKreyol}}</p>
+
+                <!-- Comments -->
+                <p class="text-muted mb-2">{{blog.comments.content}}</p>
+
+                <!-- Like button and form for comments -->
+                <footer class="blockquote-footer mb-2">{{format_date blog.createdAt}} <button onclick="like(this)" class="{{blog.id}} {{blog.totalLikes}} {{loggedInUser.id}} fa fa-thumbs-up"></button> Likes: {{blog.totalLikes}}</footer>
+                <form>
+                    <div class="card mt-2">
+                        <div class="card-header d-flex justify-content-center text-bg-dark">
+                            <h4>Lage yon ti Komantè: </h4>
+                        </div>
+                        <div class="card-body">
+                            <blockquote class="blockquote mb-0">
+                                <input id='comment' type="text" name="comment" class="col-11" placeholder="Bèl Atik!!"/>
+                                <!-- Pass the blogId to the setSelectedBlogId function -->
+                                <button id="commentSubmitBtn" type="button" class="{{blog.id}} btn btn-dark text-light" onclick="setSelectedBlogId('{{blog.id}}')">PIBLIYE</button>
+                            </blockquote>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Comments section -->
+                <h2>Komantè </h2>
+                {{#each blog.comments as |comment|}}
+                    <div class="card mt-2">
+                        <div class="card-body">
+                            <blockquote class="blockquote mb-0">
+                                <p>{{comment.content}}</p>
+                                <p class="list-group-item custom-bg text-uppercase">Otè: {{comment.author.authorname}} </p>
+                                <footer class="blockquote-footer">{{format_date comment.createdAt}}</footer>
+                            </blockquote>
+                        </div>
+                    </div>
+                {{/each}}
+
+            </div>
+        </li>
+        {{/each}}
+    </ul>
 </div>
+
 
 <!-- Hidden input field to store the selected blogId -->
 <input type="hidden" id="selectedBlogId" value="">
