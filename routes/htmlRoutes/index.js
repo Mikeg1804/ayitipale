@@ -99,7 +99,7 @@ router.get('/login', async (req, res) => {
             return plainBlog;
         });
     
- console.log(blogs[0].comments);
+//  console.log(blogs[0].comments);
 
         res.render('home', {
             blogs,
