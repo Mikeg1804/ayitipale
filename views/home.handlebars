@@ -36,18 +36,22 @@
                 <p class="text-muted mb-2">{{blog.comments.content}}</p>
 
                 <!-- Like button and form for comments -->
-                <footer class="blockquote-footer mb-2">{{format_date blog.createdAt}} <button onclick="like(this)" class="{{blog.id}} {{blog.totalLikes}} {{loggedInUser.id}} fa fa-thumbs-up"></button> Likes: {{blog.totalLikes}}</footer>
+                <footer class="blockquote-footer mb-2">{{format_date blog.createdAt}} 
+                  {{!-- <button onclick="like(this)" class="{{blog.id}} {{blog.totalLikes}} {{loggedInUser.id}} fa fa-thumbs-up"></button> Likes: {{blog.totalLikes}} --}}
+                  </footer>
                 <form>
                     <div class="card mt-2">
                         <div class="card-header d-flex justify-content-center text-bg-dark">
                             <h4>Lage yon ti Komantè: </h4>
                         </div>
+                        
                         <div class="card-body">
                             <blockquote class="blockquote mb-0">
                                 <input id='comment' type="text" name="comment" class="col-11" placeholder="Bèl Atik!!"/>
                                 <!-- Pass the blogId to the setSelectedBlogId function -->
                                 <button id="commentSubmitBtn" type="button" class="{{blog.id}} btn btn-dark text-light" onclick="setSelectedBlogId('{{blog.id}}')">PIBLIYE</button>
                             </blockquote>
+                             <a href="/authors/{{loggedInAuthor.id}}">si ou poko enregistre klike la pou ou ka komante</a>
                         </div>
                     </div>
                 </form>
